@@ -6,7 +6,13 @@ export default function NoteList({ notes, onDelete }) {
   return (
     <ul>
       {notes.map((note) => (
-        <Note key={note.id} id={note.id} text={note.text} onDelete={onDelete} />
+        <Note
+          key={note.id}
+          description={note.description}
+          id={note.id}
+          text={note.text}
+          onDelete={onDelete}
+        />
       ))}
     </ul>
   );

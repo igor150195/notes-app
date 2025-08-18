@@ -11,8 +11,6 @@ const handleDelete = (id, text) => {
   alert(`Удалить заметку с id ${id} с текстом ${text}`);
 };
 
-console.log(1);
-
 export default function App() {
   return (
     <div>

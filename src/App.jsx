@@ -3,6 +3,7 @@ import NoteList from "./components/NoteList";
 import NoteList2 from "./components/NoteList2";
 import NoteForm from "./components/NoteForm";
 import Note2 from "./components/Note2";
+import NoteList3 from "./components/NoteList3";
 
 export default function App() {
   const [notes, setNotes] = useState([
@@ -24,6 +25,14 @@ export default function App() {
     { id: Math.random() * 13, text: "333 заметка" },
     { id: Math.random() * 14, text: "444444 заметка" },
     { id: Math.random() * 14, text: "555555 заметка" },
+  ]);
+
+  const [thirdNotes, refreshThirdNotes] = useState([
+    { id: Math.random() * 11231, text: "! заметка" },
+    { id: Math.random() * 5453, text: "@ заметка" },
+    { id: Math.random() * 66, text: "# заметка" },
+    { id: Math.random() * 114, text: "$ заметка" },
+    { id: Math.random() * 444, text: "% заметка" },
   ]);
 
   const handleDelete = (deleteId) => {
@@ -55,6 +64,10 @@ export default function App() {
     refreshNotes(newNotes.filter((note) => id != note.id));
   };
 
+  const thirdDelete = (id) => {
+    refreshThirdNotes(thirdNotes.filter((note) => note.id != id));
+  };
+
   return (
     <div>
       <h1>Notes App</h1>
@@ -81,6 +94,12 @@ export default function App() {
       <br />
       <br />
       <NoteList2 notes={newNotes} onDelete={newDelete} />
+      <br />
+      <br />
+      <hr />
+      <br />
+      <br />
+      <NoteList3 mynotes={thirdNotes} onDelete={thirdDelete} />
     </div>
   );
 }

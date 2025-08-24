@@ -4,6 +4,7 @@ import NoteList2 from "./components/NoteList2";
 import NoteForm from "./components/NoteForm";
 import Note2 from "./components/Note2";
 import NoteList3 from "./components/NoteList3";
+import NoteList4 from "./components/NoteList4";
 
 export default function App() {
   const [notes, setNotes] = useState([
@@ -33,6 +34,14 @@ export default function App() {
     { id: Math.random() * 66, text: "# заметка" },
     { id: Math.random() * 114, text: "$ заметка" },
     { id: Math.random() * 444, text: "% заметка" },
+  ]);
+
+  const [tasks, setTask] = useState([
+    { id: Math.random() * Date.now(), text: "Задача 1" },
+    { id: Math.random() * Date.now(), text: "Задача 2" },
+    { id: Math.random() * Date.now(), text: "Задача 3" },
+    { id: Math.random() * Date.now(), text: "Задача 4" },
+    { id: Math.random() * Date.now(), text: "Задача 5" },
   ]);
 
   const handleDelete = (deleteId) => {
@@ -68,38 +77,42 @@ export default function App() {
     refreshThirdNotes(thirdNotes.filter((note) => note.id != id));
   };
 
+  const upDateTask = (id) => {
+    setTask(tasks.filter((task) => id != task.id));
+  };
+
   return (
-    <div>
+    <div className="notes-app">
       <h1>Notes App</h1>
-      <NoteList notes={notes} onDelete={handleDelete} />
-      <NoteForm onAdd={handleOnAdd} />
-      <br />
-      <br />
-      <hr />
-      <br />
-      <br />
+      <div className="notes-app__list">
+        <div className="notes-app__list-item">
+          <NoteList notes={notes} onDelete={handleDelete} />
+          <NoteForm onAdd={handleOnAdd} />
+        </div>
 
-      {myNotes.map((note) => (
-        <Note2
-          key={note.id}
-          id={note.id}
-          text={note.text}
-          onDelete={deleteNote}
-        />
-      ))}
+        <div className="notes-app__list-item">
+          {myNotes.map((note) => (
+            <Note2
+              key={note.id}
+              id={note.id}
+              text={note.text}
+              onDelete={deleteNote}
+            />
+          ))}
+        </div>
 
-      <br />
-      <br />
-      <hr />
-      <br />
-      <br />
-      <NoteList2 notes={newNotes} onDelete={newDelete} />
-      <br />
-      <br />
-      <hr />
-      <br />
-      <br />
-      <NoteList3 mynotes={thirdNotes} onDelete={thirdDelete} />
+        <div className="notes-app__list-item">
+          <NoteList2 notes={newNotes} onDelete={newDelete} />
+        </div>
+
+        <div className="notes-app__list-item">
+          <NoteList3 mynotes={thirdNotes} onDelete={thirdDelete} />
+        </div>
+
+        <div className="notes-app__list-item">
+          <NoteList4 tasks={tasks} deleteTask={upDateTask} />
+        </div>
+      </div>
     </div>
   );
 }

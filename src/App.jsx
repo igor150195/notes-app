@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NoteList from "./components/NoteList";
 import NoteList2 from "./components/NoteList2";
 import NoteForm from "./components/NoteForm";
+import NoteForm2 from "./components/NoteForm2";
 import Note2 from "./components/Note2";
 import NoteList3 from "./components/NoteList3";
 import NoteList4 from "./components/NoteList4";
@@ -81,6 +82,15 @@ export default function App() {
     setTask(tasks.filter((task) => id != task.id));
   };
 
+  const handleOnAdd2 = (text) => {
+    const newTask = {
+      id: Math.random() * Date.now(),
+      text: text,
+    };
+
+    setTask([...tasks, newTask]);
+  };
+
   return (
     <div className="notes-app">
       <h1>Notes App</h1>
@@ -111,6 +121,7 @@ export default function App() {
 
         <div className="notes-app__list-item">
           <NoteList4 tasks={tasks} deleteTask={upDateTask} />
+          <NoteForm2 onAdd={handleOnAdd2} />
         </div>
       </div>
     </div>
